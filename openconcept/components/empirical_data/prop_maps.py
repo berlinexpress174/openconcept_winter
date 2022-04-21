@@ -83,6 +83,33 @@ def propeller_map_highpower(vec_size=1):
     interp.add_output('eta_prop', 0.8, data)
     return interp
 
+def propeller_map_VTOL(vec_size=1):
+    J = np.linspace(0.0,4.0,9)
+    cp = np.linspace(0.0,2.5,13)
+
+    data = np.array([[0.28,0.51,0.65,0.66,0.65,0.64,0.63,0.60,0.60],
+                  [0.50,0.74,0.71,0.70,0.68,0.65,0.64,0.60,0.60],
+                  [0.80,0.80,0.85,0.83,0.82,0.80,0.75,0.70,0.69],
+                  [0.83,0.88,0.90,0.88,0.84,0.78,0.74,0.69,0.65],
+                  [0.88,0.90,0.91,0.88,0.83,0.78,0.74,0.68,0.64],
+                  [0.85,0.86,0.91,0.84,0.82,0.75,0.73,0.68,0.63],
+                  [0.70,0.83,0.85,0.83,0.80,0.73,0.73,0.66,0.61],
+                  [0.60,0.66,0.84,0.82,0.75,0.73,0.70,0.66,0.61],
+                  [0.40,0.55,0.75,0.75,0.73,0.72,0.70,0.65,0.60],
+                  [0.20,0.32,0.62,0.62,0.72,0.70,0.69,0.62,0.58],
+                  [0.10,0.18,0.40,0.50,0.68,0.68,0.64,0.60,0.55],
+                  [0.05,0.14,0.35,0.40,0.55,0.60,0.55,0.60,0.53],
+                  [0.04,0.12,0.25,0.30,0.52,0.50,0.50,0.60,0.50]])
+
+    data[:,0] = np.zeros(13)
+    # Create regular grid interpolator instance
+    interp = MetaModelStructuredComp(method='scipy_cubic',extrapolate=True,vec_size=vec_size)
+    interp.add_input('cp', 0.3, cp)
+    interp.add_input('J', 1, J)
+    interp.add_output('eta_prop', 0.8, data)
+    return interp
+
+
 class ConstantPropEfficiency(ExplicitComponent):
     def initialize(self):
         #define technology factors
