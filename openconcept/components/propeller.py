@@ -2,7 +2,7 @@ from __future__ import division
 import numpy as np
 from openmdao.api import ExplicitComponent
 from openmdao.api import Group
-from .empirical_data.prop_maps import propeller_map_Raymer, propeller_map_highpower, static_propeller_map_Raymer, static_propeller_map_highpower, propeller_map_scaled, propeller_map_constant_prop_efficiency
+from .empirical_data.prop_maps import propeller_map_Raymer, propeller_map_highpower, static_propeller_map_Raymer, static_propeller_map_highpower, propeller_map_scaled, propeller_map_constant_prop_efficiency, propeller_map_VTOL
 
 class SimplePropeller(Group):
     """This propeller is representative of a constant-speed prop.
@@ -56,7 +56,7 @@ class SimplePropeller(Group):
         if n_blades == 3:
             propmap = propeller_map_Raymer(nn)
             staticpropmap = static_propeller_map_Raymer(nn)
-        if n_blades == 4:
+        elif n_blades == 4:
             propmap = propeller_map_highpower(nn)
             staticpropmap = static_propeller_map_highpower(nn)
         else:

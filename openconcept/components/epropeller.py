@@ -51,7 +51,6 @@ class SimpleEPropeller(Group):
     def setup(self):
         nn = self.options['num_nodes']
         n_blades = self.options['num_blades']
-        #print('-- n_blade --',n_blades)
         design_J = self.options['design_J']
         design_cp = self.options['design_cp']
         if n_blades == 3:
